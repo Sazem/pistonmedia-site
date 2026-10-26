@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Website Update | Your Company</title>
+    <meta name="description"
+          content="We're leveling things up. Our gaming company website is currently being updated.">
+
+    <meta name="theme-color" content="#050d1a">
+
+    <style>
+        :root {
+            --bg: #050d1a;
+            --surface: #0b1729;
+            --text: #ecf6ff;
+            --muted: #9eb4d1;
+            --purple: #4ca6ff;
+            --blue: #7ec8ff;
+            --border: rgba(110, 170, 255, 0.22);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: 100svh;
+            overflow-x: hidden;
+            background:
+                radial-gradient(
+                    ellipse at 50% 30%,
+                    rgba(34, 102, 214, 0.2),
+                    transparent 52%
+                ),
+                var(--bg);
+            color: var(--text);
+            font-family: Inter, "Segoe UI", system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .page {
+            position: relative;
+            isolation: isolate;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: min(100% - 40px, 1000px);
+            min-height: 100vh;
+            min-height: 100svh;
+            margin: 0 auto;
+            padding: 44px 0 24px;
+        }
+
+        /* Ambient background lighting */
+
+        .ambient {
+            position: absolute;
+            z-index: -1;
+            top: 12%;
+            left: 50%;
+            width: min(80vw, 700px);
+            aspect-ratio: 1;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: rgba(67, 94, 175, 0.12);
+            filter: blur(100px);
+            pointer-events: none;
+        }
+
+        .stars {
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #fde3b5;
+            opacity: 0.35;
+            animation: twinkle 3s ease-in-out infinite alternate;
+        }
+
+        /* Header */
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            animation: fade-in 800ms ease both;
+        }
+
+        .logo-mark {
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(97, 170, 255, 0.12);
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(79, 161, 255, 0.12);
+        }
+
+        .logo-mark img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .brand {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .brand span {
+            color: var(--purple);
+        }
+
+        /* Gaming emblem */
+
+        .hero-art {
+            position: relative;
+            display: grid;
+            place-items: center;
+            height: clamp(180px, 27vw, 270px);
+            margin: 4px 0 0;
+        }
+
+        .orb {
+            position: absolute;
+            width: clamp(180px, 32vw, 300px);
+            aspect-ratio: 1;
+            border: 1px solid rgba(117, 180, 255, 0.18);
+            border-radius: 50%;
+            box-shadow:
+                0 0 70px rgba(58, 122, 255, 0.15),
+                inset 0 0 70px rgba(58, 122, 255, 0.08);
+        }
+
+        .orb::before,
+        .orb::after {
+            content: "";
+            position: absolute;
+            inset: 12%;
+            border: 1px solid rgba(116, 196, 255, 0.18);
+            border-radius: 50%;
+        }
+
+        .orb::after {
+            inset: 25%;
+            border-color: rgba(76, 166, 255, 0.26);
+        }
+
+        .controller {
+            position: relative;
+            z-index: 1;
+            width: clamp(130px, 22vw, 190px);
+            color: #58b8ff;
+            filter:
+                drop-shadow(0 0 10px rgba(96, 169, 255, 0.88))
+                drop-shadow(0 0 32px rgba(20, 118, 255, 0.28));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floor-glow {
+            position: absolute;
+            bottom: 12%;
+            width: clamp(170px, 35vw, 340px);
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(99, 171, 255, 0.9);
+            filter: blur(30px);
+            opacity: 0.65;
+        }
+
+        /* Main message */
+
+        .content {
+            width: 100%;
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: center;
+            animation: fade-in 1s ease 150ms both;
+        }
+
+        .status {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            color: #ffbd4b;
+            font-size: 11px;
+            font-weight: 750;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffbd4b;
+            box-shadow: 0 0 12px #937b23;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(38px, 7vw, 76px);
+            font-weight: 900;
+            line-height: 0.99;
+            letter-spacing: -0.055em;
+            text-transform: uppercase;
+        }
+
+        h1 span {
+            display: block;
+            margin-top: 8px;
+            background: linear-gradient(
+                100deg,
+                #dff6ff,
+                #6ec9ff 44%,
+                #5ca2ff
+            );
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .description {
+            max-width: 540px;
+            margin: 24px auto 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.85;
+        }
+
+        .description strong {
+            color: #ebf7ff;
+            font-weight: 600;
+        }
+
+        .steam-block {
+            width: min(100%, 540px);
+            margin: 18px auto 0;
+            text-align: left;
+        }
+
+        .steam-label {
+            margin: 0 0 10px;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .steam-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .steam-card {
+            display: block;
+            text-decoration: none;
+            border: 1px solid rgba(95, 167, 255, 0.28);
+            border-radius: 14px;
+            overflow: hidden;
+            background: rgba(9, 18, 30, 0.8);
+            box-shadow: 0 14px 24px rgba(3, 10, 20, 0.24);
+            transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+        }
+
+        .steam-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(124, 208, 255, 0.7);
+            box-shadow: 0 18px 26px rgba(24, 65, 108, 0.28);
+        }
+
+        .steam-card img {
+            display: block;
+            width: 100%;
+            height: 138px;
+            object-fit: cover;
+            background: #0d1c2d;
+        }
+
+        .steam-card-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 14px;
+            color: var(--text);
+        }
+
+        .steam-card-title {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .steam-card-tag {
+            color: #9fd5ff;
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* Contact */
+
+        .contact-label {
+            margin: 26px 0 13px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .contact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 11px;
+            max-width: 100%;
+            min-height: 54px;
+            padding: 14px 26px;
+            border: 1px solid rgba(95, 167, 255, 0.7);
+            border-radius: 8px;
+            background: linear-gradient(
+                110deg,
+                rgba(18, 72, 146, 0.2),
+                rgba(45, 143, 255, 0.08)
+            );
+            color: #f1f9ff;
+            font-size: 14px;
+            font-weight: 650;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+            cursor: pointer;
+            box-shadow:
+                0 0 22px rgba(70, 130, 255, 0.1),
+                inset 0 0 16px rgba(90, 165, 255, 0.04);
+            transition:
+                transform 200ms ease,
+                border-color 200ms ease,
+                box-shadow 200ms ease;
+        }
+
+        .contact svg {
+            width: 19px;
+            height: 19px;
+            flex-shrink: 0;
+            color: #faffb0;
+        }
+
+        .contact:hover {
+            transform: translateY(-2px);
+            border-color: #7cd0ff;
+            box-shadow:
+                0 0 30px rgba(92, 163, 255, 0.22),
+                inset 0 0 18px rgba(92, 163, 255, 0.08);
+        }
+
+        .contact:focus-visible {
+            outline: 2px solid #84e2fc;
+            outline-offset: 5px;
+        }
+
+        /* Footer */
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-top: 52px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border);
+            color: #81879f;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer-icon {
+            color: var(--purple);
+            font-size: 19px;
+        }
+
+        /* Animations */
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 12px rgba(90, 164, 255, 0.8);
+            }
+            50% {
+                opacity: 0.55;
+                box-shadow: 0 0 4px rgba(90, 164, 255, 0.6);
+            }
+        }
+
+        @keyframes twinkle {
+            from { opacity: 0.12; }
+            to { opacity: 0.65; }
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page {
+                width: calc(100% - 32px);
+                padding: 28px 0 20px;
+            }
+
+            .hero-art {
+                height: 190px;
+            }
+
+            .status {
+                font-size: 9px;
+                letter-spacing: 0.15em;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+
+            .contact {
+                width: 100%;
+                padding-inline: 14px;
+                font-size: 13px;
+            }
+
+            .footer {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                gap: 10px;
+                margin-top: 34px;
+            }
+
+            .footer-icon {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <div class="ambient" aria-hidden="true"></div>
+        <div class="stars" id="stars" aria-hidden="true"></div>
+
+        <header class="header">
+            <div class="logo-mark" aria-label="Piston Media logo">
+                <img src="LogoOnly_transp.png" alt="Piston Media logo">
+            </div>
+            <p class="brand">Piston <span>Media</span></p>
+        </header>
+
+        <div class="hero-art" aria-hidden="true">
+            <div class="orb"></div>
+
+            <svg class="controller"
+                 viewBox="0 0 200 130"
+                 fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M57 28H143C155 28 164 36 168 48L190 99
+                       C195 113 181 122 170 114L137 90H63L30 114
+                       C19 122 5 113 10 99L32 48C36 36 45 28 57 28Z"
+                    fill="#0b1c2f"
+                    stroke="currentColor"
+                    stroke-width="3"
+                />
+                <path
+                    d="M43 51V75M31 63H55"
+                    stroke="currentColor"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                />
+                <circle cx="146" cy="54" r="5" fill="#7ec8ff"/>
+                <circle cx="161" cy="68" r="5" fill="#dff8ff"/>
+                <circle cx="132" cy="68" r="5" fill="#dff8ff"/>
+                <circle cx="146" cy="82" r="5" fill="#7ec8ff"/>
+                <circle cx="75" cy="70" r="13"
+                        stroke="currentColor" stroke-width="3"/>
+                <circle cx="110" cy="70" r="13"
+                        stroke="currentColor" stroke-width="3"/>
+                <path d="M81 38H119"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      opacity=".65"/>
+            </svg>
+
+            <div class="floor-glow"></div>
+        </div>
+
+        <section class="content" aria-labelledby="title">
+            <div class="status">
+                <span class="status-dot"></span>
+                Website in progress
+            </div>
+
+            <h1 id="title">
+                We're building the next level.
+                <span>Stay tuned.</span>
+            </h1>
+
+            <div class="description">
+                <p>
+                    website is temporarily offline while we refine the next chapter. <br>
+                    In the meantime, we’re still here and ready to connect.<br>
+                    Also, you can check out our games on Steam.
+                </p>
+            </div>
+
+            <div class="steam-block" aria-label="Featured Steam games">
+                <p class="steam-label">Featured games</p>
+                <div class="steam-grid">
+                    <a class="steam-card" href="https://store.steampowered.com/app/3104850/Trailer_Park_Zombies/" target="_blank" rel="noreferrer noopener">
+                        <img src="trailer_park_zombies_header.jpg" alt="Trailer Park Zombies cover art">
+                        <div class="steam-card-body">
+                            <span class="steam-card-title">Trailer Park Zombies</span>
+                            <span class="steam-card-tag">Steam</span>
+                        </div>
+                    </a>
+
+                    <a class="steam-card" href="https://store.steampowered.com/app/926400/Scatteria_Postapocalyptic_shooter/" target="_blank" rel="noreferrer noopener">
+                        <img src="scatteria_header.jpg" alt="Scatteria cover art">
+                        <div class="steam-card-body">
+                            <span class="steam-card-title">Scatteria</span>
+                            <span class="steam-card-tag">Steam</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <p class="contact-label">Need to reach me? (copy the email by clicking the button)</p>
+
+            <button class="contact" type="button"
+                    data-copy="c2FtcG9AcGlzdG9ubWVkaWEuZmk="
+                    aria-label="Copy email address">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="m3 7 9 6 9-6"/>
+                </svg>
+                <span class="contact-text">sampo(a)pistonmedia.fi</span>
+            </button>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; <span id="year"></span> Piston Media</p>
+            <span class="footer-icon" aria-hidden="true">✦</span>
+            <p>Thanks for your patience</p>
+        </footer>
+    </main>
+
+    <script>
+        // Automatic copyright year.
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        const copyButton = document.querySelector(".contact");
+
+        if (copyButton) {
+            const encodedEmail = copyButton.dataset.copy || "";
+            const email = atob(encodedEmail);
+
+            const setCopyState = (text) => {
+                const label = copyButton.querySelector(".contact-text");
+                if (label) label.textContent = text;
+            };
+
+            copyButton.addEventListener("click", async () => {
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(email);
+                    } else {
+                        const helper = document.createElement("textarea");
+                        helper.value = email;
+                        helper.setAttribute("readonly", "");
+                        helper.style.position = "fixed";
+                        helper.style.left = "-9999px";
+                        document.body.appendChild(helper);
+                        helper.select();
+                        document.execCommand("copy");
+                        document.body.removeChild(helper);
+                    }
+
+                    setCopyState("Email copied");
+                    copyButton.setAttribute("aria-label", "Email copied to clipboard");
+
+                    window.setTimeout(() => {
+                        setCopyState("sampo(a)pistonmedia.fi");
+                        copyButton.setAttribute("aria-label", "Sampo(a)pistonmedia.fi");
+                    }, 1800);
+                } catch (error) {
+                    setCopyState("Copy failed");
+                    copyButton.setAttribute("aria-label", "Copy failed");
+
+                    window.setTimeout(() => {
+                        setCopyState("sampo(a)pistonmedia.fi");
+                        copyButton.setAttribute("aria-label", "sampo(a)pistonmedia.fi");
+                    }, 1800);
+                }
+            });
+        }
+
+        // Add a small number of decorative background stars.
+        const stars = document.getElementById("stars");
+        const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        if (!reducedMotion) {
+            for (let i = 0; i < 35; i++) {
+                const star = document.createElement("span");
+
+                star.className = "star";
+                star.style.left = Math.random() * 100 + "%";
+                star.style.top = Math.random() * 100 + "%";
+                star.style.animationDelay =
+                    Math.random() * 3 + "s";
+                star.style.animationDuration =
+                    (2 + Math.random() * 3) + "s";
+
+                stars.appendChild(star);
+            }
+        }
+    </script>
+</body>
+</html>
